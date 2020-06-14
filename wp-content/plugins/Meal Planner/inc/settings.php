@@ -28,3 +28,15 @@ function user_dashboard() {
     include dirname( __FILE__ ) . '/user_dashboard.php';
 } // function my_form_shortcode
 add_shortcode( 'user_dashboard_main', 'user_dashboard' );
+
+function meal_plan() {
+	//print_r(dirname( __FILE__ ));
+	include dirname( __FILE__ ) . '/create_meal_plan.php';
+} // function my_form_shortcode
+add_shortcode( 'create_meal_plan', 'meal_plan' );
+
+function get_rec() {
+	//print_r(dirname( __FILE__ ));
+	include dirname( __FILE__ ) . '/get_recipes.php';
+} // function my_form_shortcode
+add_shortcode( 'get_rec', 'get_rec' );

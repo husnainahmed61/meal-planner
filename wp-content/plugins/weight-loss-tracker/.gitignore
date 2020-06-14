@@ -1,0 +1,6 @@
+.idea/*
+.idea/modules.xml
+.idea/vcs.xml
+.idea/weight-loss-tracker.iml
+.idea/workspace.xml
+includes/languages/.DS_Store
