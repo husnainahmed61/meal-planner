@@ -13,6 +13,7 @@ while ($query->have_posts()) {
 	$query->the_post();
 	$post_id = get_the_ID();
 	$post_content = array(
+		'post_id' => $post_id,
 		'post_content' => get_post_meta( $post_id, $key = '', $single = false ),
 		'post_thumbnail' => get_the_post_thumbnail_url( $post_id, $size = 'post-thumbnail' ) ,
 		);

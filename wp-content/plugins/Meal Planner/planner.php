@@ -51,7 +51,7 @@ add_action('wp_enqueue_scripts', 'wpac_plugin_scripts');
 
 function enqueue_admin_script() {
     // Stylsheets
-    //wp_enqueue_style('bootstrap3-style', WPAC_PLUGIN_DIR . 'assets/js/bootstrap.min.css');
+    wp_enqueue_style('bootstrap3-style', WPAC_PLUGIN_DIR . 'assets/js/bootstrap.min.css');
     wp_enqueue_style('datatable-style', WPAC_PLUGIN_DIR . 'assets/datatable/jquery.dataTables.min.css');
 
 //    // Bootstrap JS
@@ -87,7 +87,7 @@ function wpac_planner_table()
       id int(11) NOT NULL AUTO_INCREMENT,
       user_id varchar(255) NOT NULL,
       round int(11) DEFAULT 1,
-      starting_date DATETIME DEFAULT NULL,
+      starting_date DATE DEFAULT NULL,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY  (id)
     ) $charset_collate";
@@ -95,11 +95,17 @@ function wpac_planner_table()
 	$sql2 = "CREATE TABLE IF NOT EXISTS $meal_plans (
       id int(11) NOT NULL AUTO_INCREMENT,
       user_id int(11),
-      action_date  DATETIME DEFAULT NULL,
-      action_type varchar(255),
-      reciepe_id int(11),
-      is_checked int(1) DEFAULT 0,
-      is_favourite int(1) DEFAULT 0,
+      round int(11) DEFAULT 1,
+      action_date  DATE DEFAULT NULL,
+      bf_reciepe_id int(11) DEFAULT NULL,
+      bf_is_checked int(1) DEFAULT 0,
+      bf_is_favourite int(1) DEFAULT 0,
+      lunch_reciepe_id int(11) DEFAULT NULL,
+      lunch_is_checked int(1) DEFAULT 0,
+      lunch_is_favourite int(1) DEFAULT 0,
+      dinner_reciepe_id int(11) DEFAULT NULL,
+      dinner_is_checked int(1) DEFAULT 0,
+      dinner_is_favourite int(1) DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       deleted_at DATETIME DEFAULT NULL,
       PRIMARY KEY  (id)
