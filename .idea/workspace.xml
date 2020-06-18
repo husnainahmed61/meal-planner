@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c27875f8-0062-4d15-98bd-a0a1628b74a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/add_favourite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/add_reciepe.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/auto_initalize_customer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/initalize_customer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/perform_meal_check.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/all_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/all_users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/create_meal_plan.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/create_meal_plan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/get_recipes.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/inc/get_recipes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/planner.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/Meal Planner/planner.php" afterDir="false" />
-    </list>
+    <list default="true" id="c27875f8-0062-4d15-98bd-a0a1628b74a3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +60,7 @@
       <workItem from="1592225164669" duration="13617000" />
       <workItem from="1592305694745" duration="47000" />
       <workItem from="1592308478968" duration="15092000" />
-      <workItem from="1592389145823" duration="29104000" />
+      <workItem from="1592389145823" duration="29863000" />
     </task>
     <servers />
   </component>
