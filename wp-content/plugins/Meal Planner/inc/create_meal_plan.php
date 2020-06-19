@@ -28,6 +28,47 @@ if ($user_id != 0){
     .btn:hover, .btn:focus{
         color: white;
     }
+	/********************************************************************/
+	/*** PANEL INFO ***/
+	.with-nav-tabs.panel-info .nav-tabs > li > a,
+	.with-nav-tabs.panel-info .nav-tabs > li > a:hover,
+	.with-nav-tabs.panel-info .nav-tabs > li > a:focus {
+		color: #31708f;
+	}
+	.with-nav-tabs.panel-info .nav-tabs > .open > a,
+	.with-nav-tabs.panel-info .nav-tabs > .open > a:hover,
+	.with-nav-tabs.panel-info .nav-tabs > .open > a:focus,
+	.with-nav-tabs.panel-info .nav-tabs > li > a:hover,
+	.with-nav-tabs.panel-info .nav-tabs > li > a:focus {
+		color: #31708f;
+		background-color: #bce8f1;
+		border-color: transparent;
+	}
+	.with-nav-tabs.panel-info .nav-tabs > li.active > a,
+	.with-nav-tabs.panel-info .nav-tabs > li.active > a:hover,
+	.with-nav-tabs.panel-info .nav-tabs > li.active > a:focus {
+		color: #31708f;
+		background-color: #fff;
+		border-color: #bce8f1;
+		border-bottom-color: transparent;
+	}
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu {
+		background-color: #d9edf7;
+		border-color: #bce8f1;
+	}
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > li > a {
+		color: #31708f;
+	}
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+		background-color: #bce8f1;
+	}
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+	.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+		color: #fff;
+		background-color: #31708f;
+	}
 </style>
 <div class="container-fluid">
 	<div class="row" >
@@ -274,8 +315,648 @@ if ($user_id != 0){
                 </div>
 			</div>
 			<div class="tab-pane fade" id="profile">
-				<h2>Profile Content Goes Here</h2>
-				<img src="http://lorempixel.com/400/400/cats/2" alt="Cats"/>
+				<h2>Reciepes Content Goes Here</h2>
+				<div class="panel with-nav-tabs panel-info">
+					<div class="panel-heading">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab1info" data-toggle="tab">Week 1</a></li>
+							<li><a href="#tab2info" data-toggle="tab">Week 2</a></li>
+							<li><a href="#tab3info" data-toggle="tab">Week 3</a></li>
+							<li><a href="#tab4info" data-toggle="tab">Week 4</a></li>
+						</ul>
+					</div>
+					<div class="panel-body">
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="tab1info">
+								<?php if (isset($FirstWeekPlan) && !empty($FirstWeekPlan)) {
+								foreach ($FirstWeekPlan as $key => $plan) {
+								$bf_meta = get_post_meta($plan->bf_reciepe_id);
+								$bf_image = get_the_post_thumbnail_url( $plan->bf_reciepe_id, $size = 'post-thumbnail' );
+
+								$lunch_meta = get_post_meta($plan->lunch_reciepe_id);
+								$lunch_image = get_the_post_thumbnail_url( $plan->lunch_reciepe_id, $size = 'post-thumbnail' );
+
+								$dinner_meta = get_post_meta($plan->dinner_reciepe_id);
+								$dinner_image = get_the_post_thumbnail_url( $plan->dinner_reciepe_id, $size = 'post-thumbnail' );
+								$day = $key+1;
+								?>
+									<!--Break Fast goes here-->
+									<div class="row">
+										<div class="col-md-4">
+											<h3><?=$bf_meta['recipe_title'][0]?></h3>
+										</div>
+										<div class="col-md-4">
+											<h5>Day <?=$day?></h5>
+										</div>
+										<div class="col-md-4">
+											<p><?=date('D',strtotime($plan->action_date)) ?> - Breakfast</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<img src="<?=$bf_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+										</div>
+										<div class="col-md-8">
+											<h5>Description</h5>
+											<p><?=($bf_meta['recipe_description'][0])?></p>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-4" style="background-color: beige;padding: 15px">
+											<p><?=$bf_meta['recipe_servings'][0]?> Servings</p>
+											<h5>Ingredients</h5>
+											<?php $json = $bf_meta['recipe_ingredients'][0];
+											$json_un = unserialize($json);
+
+											foreach ($json_un as $key => $ing){
+												?>
+												<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+											<?php } ?>
+
+										</div>
+										<div class="col-md-8 ">
+											<h5>Instructions</h5>
+											<?php $json = $bf_meta['recipe_instructions'][0];
+											$json_un = unserialize($json);
+											//print_r($json_un)
+											foreach ($json_un as $key => $desc){
+												?>
+												<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+											<?php } ?>
+										</div>
+									</div>
+									<hr>
+									<!--Lunch goes here-->
+									<div class="row">
+										<div class="col-md-4">
+											<h3><?=$lunch_meta['recipe_title'][0]?></h3>
+										</div>
+										<div class="col-md-4">
+											<h5>Day <?=$day?></h5>
+										</div>
+										<div class="col-md-4">
+											<p><?=date('D',strtotime($plan->action_date)) ?> - Lunch</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<img src="<?=$lunch_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+										</div>
+										<div class="col-md-8">
+											<h5>Description</h5>
+											<p><?=($lunch_meta['recipe_description'][0])?></p>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-4" style="background-color: beige;padding: 15px">
+											<p><?=$lunch_meta['recipe_servings'][0]?> Servings</p>
+											<h5>Ingredients</h5>
+											<?php $json = $lunch_meta['recipe_ingredients'][0];
+											$json_un = unserialize($json);
+
+											foreach ($json_un as $key => $ing){
+												?>
+												<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+											<?php } ?>
+
+										</div>
+										<div class="col-md-8 ">
+											<h5>Instructions</h5>
+											<?php $json = $lunch_meta['recipe_instructions'][0];
+											$json_un = unserialize($json);
+											//print_r($json_un)
+											foreach ($json_un as $key => $desc){
+												?>
+												<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+											<?php } ?>
+										</div>
+									</div>
+									<hr>
+									<!--Dinner Goes here-->
+									<div class="row">
+										<div class="col-md-4">
+											<h3><?=$dinner_meta['recipe_title'][0]?></h3>
+										</div>
+										<div class="col-md-4">
+											<h5>Day <?=$day?></h5>
+										</div>
+										<div class="col-md-4">
+											<p><?=date('D',strtotime($plan->action_date)) ?> - Dinner</p>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<img src="<?=$dinner_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+										</div>
+										<div class="col-md-8">
+											<h5>Description</h5>
+											<p><?=($dinner_meta['recipe_description'][0])?></p>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-4" style="background-color: beige;padding: 15px">
+											<p><?=$dinner_meta['recipe_servings'][0]?> Servings</p>
+											<h5>Ingredients</h5>
+											<?php $json = $dinner_meta['recipe_ingredients'][0];
+											$json_un = unserialize($json);
+
+											foreach ($json_un as $key => $ing){
+											?>
+											<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+											<?php } ?>
+
+										</div>
+										<div class="col-md-8 ">
+											<h5>Instructions</h5>
+											<?php $json = $dinner_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+											foreach ($json_un as $key => $desc){
+											?>
+											<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+											<?php } ?>
+										</div>
+									</div>
+									<hr>
+								<?php } } ?>
+							</div>
+							<div class="tab-pane fade" id="tab2info">
+								<?php if (isset($secondWeekPlan) && !empty($secondWeekPlan)) {
+									foreach ($secondWeekPlan as $key => $plan) {
+										$bf_meta = get_post_meta($plan->bf_reciepe_id);
+										$bf_image = get_the_post_thumbnail_url( $plan->bf_reciepe_id, $size = 'post-thumbnail' );
+
+										$lunch_meta = get_post_meta($plan->lunch_reciepe_id);
+										$lunch_image = get_the_post_thumbnail_url( $plan->lunch_reciepe_id, $size = 'post-thumbnail' );
+
+										$dinner_meta = get_post_meta($plan->dinner_reciepe_id);
+										$dinner_image = get_the_post_thumbnail_url( $plan->dinner_reciepe_id, $size = 'post-thumbnail' );
+										$day = 8+$key;
+										?>
+										<!--Break Fast goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$bf_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Breakfast</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$bf_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($bf_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$bf_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $bf_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $bf_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+										<!--Lunch goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$lunch_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Lunch</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$lunch_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($lunch_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$lunch_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $lunch_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $lunch_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+										<!--Dinner Goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$dinner_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Dinner</p>
+											</div>
+
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$dinner_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($dinner_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$dinner_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $dinner_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $dinner_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+									<?php } } ?>
+							</div>
+							<div class="tab-pane fade" id="tab3info">
+								<?php if (isset($thirdWeekPlan) && !empty($thirdWeekPlan)) {
+									foreach ($thirdWeekPlan as $key => $plan) {
+										$bf_meta = get_post_meta($plan->bf_reciepe_id);
+										$bf_image = get_the_post_thumbnail_url( $plan->bf_reciepe_id, $size = 'post-thumbnail' );
+
+										$lunch_meta = get_post_meta($plan->lunch_reciepe_id);
+										$lunch_image = get_the_post_thumbnail_url( $plan->lunch_reciepe_id, $size = 'post-thumbnail' );
+
+										$dinner_meta = get_post_meta($plan->dinner_reciepe_id);
+										$dinner_image = get_the_post_thumbnail_url( $plan->dinner_reciepe_id, $size = 'post-thumbnail' );
+										$day = 15+$key;
+										?>
+										<!--Break Fast goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$bf_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Breakfast</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$bf_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($bf_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$bf_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $bf_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $bf_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+										<!--Lunch goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$lunch_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Lunch</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$lunch_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($lunch_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$lunch_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $lunch_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $lunch_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+										<!--Dinner Goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$dinner_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Dinner</p>
+											</div>
+
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$dinner_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($dinner_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$dinner_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $dinner_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $dinner_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+									<?php } } ?>
+							</div>
+							<div class="tab-pane fade" id="tab4info">
+								<?php if (isset($fourthWeekPlan) && !empty($fourthWeekPlan)) {
+									foreach ($fourthWeekPlan as $key => $plan) {
+										$bf_meta = get_post_meta($plan->bf_reciepe_id);
+										$bf_image = get_the_post_thumbnail_url( $plan->bf_reciepe_id, $size = 'post-thumbnail' );
+
+										$lunch_meta = get_post_meta($plan->lunch_reciepe_id);
+										$lunch_image = get_the_post_thumbnail_url( $plan->lunch_reciepe_id, $size = 'post-thumbnail' );
+
+										$dinner_meta = get_post_meta($plan->dinner_reciepe_id);
+										$dinner_image = get_the_post_thumbnail_url( $plan->dinner_reciepe_id, $size = 'post-thumbnail' );
+										$day = 22+$key;
+										?>
+										<!--Break Fast goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$bf_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Breakfast</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$bf_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($bf_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$bf_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $bf_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $bf_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+										<!--Lunch goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$lunch_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Lunch</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$lunch_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($lunch_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$lunch_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $lunch_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $lunch_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+										<!--Dinner Goes here-->
+										<div class="row">
+											<div class="col-md-4">
+												<h3><?=$dinner_meta['recipe_title'][0]?></h3>
+											</div>
+											<div class="col-md-4">
+												<h5>Day <?=$day?></h5>
+											</div>
+											<div class="col-md-4">
+												<p><?=date('D',strtotime($plan->action_date)) ?> - Dinner</p>
+											</div>
+
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=$dinner_image?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+											</div>
+											<div class="col-md-8">
+												<h5>Description</h5>
+												<p><?=($dinner_meta['recipe_description'][0])?></p>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4" style="background-color: beige;padding: 15px">
+												<p><?=$dinner_meta['recipe_servings'][0]?> Servings</p>
+												<h5>Ingredients</h5>
+												<?php $json = $dinner_meta['recipe_ingredients'][0];
+												$json_un = unserialize($json);
+
+												foreach ($json_un as $key => $ing){
+													?>
+													<p style="margin: 0"><?=$ing['amount'].' '.$ing['unit'].' ,'.$ing['ingredient'].' '.($ing['notes'])?></p>
+												<?php } ?>
+
+											</div>
+											<div class="col-md-8 ">
+												<h5>Instructions</h5>
+												<?php $json = $dinner_meta['recipe_instructions'][0];
+												$json_un = unserialize($json);
+												//print_r($json_un)
+												foreach ($json_un as $key => $desc){
+													?>
+													<p style="margin: 0"><?=$key+1?> : <?=$desc['description']?></p>
+												<?php } ?>
+											</div>
+										</div>
+										<hr>
+									<?php } } ?></div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="tab-pane fade" id="settings">
 				<h2>Settings Content Goes Here</h2>
@@ -456,13 +1137,34 @@ if ($user_id != 0){
                     $('#reciepes').html(rows);
                 }
             });
-
+        }
+        function getFavourites(planId,planType)
+        {
+            $.ajax
+            ({
+                type: "post",
+                url: "<?=WPAC_PLUGIN_DIR?>" + "inc/get_favourite.php",
+                cache: false,
+                success: function(res)
+                {
+                    var jsonParse = JSON.parse(res);
+                    console.log(jsonParse);
+                    var rows = '';
+                    for(var i = 0; i < jsonParse.length; i++) {
+                        var obj = jsonParse[i];
+                        rows+=table_row(jsonParse[i],planId,planType);
+                        //console.log(obj.post_thumbnail);
+                    }
+                    $('#favourite').html(rows);
+                }
+            });
         }
         $(".select_recipe").click(function () {
             var planId = $(this).attr('data-id');
             var planType = $(this).attr('data-type');
             //alert(planType);
             getReciepes(planId,planType);
+            getFavourites(planId,planType);
             $('#myModal').modal('show');
         });
 
