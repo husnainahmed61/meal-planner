@@ -5,9 +5,15 @@ global $wpdb;
 $meal_planer      = $wpdb->prefix . "meal_planer";
 $meal_plans    = $wpdb->prefix . "meal_plans";
 
-//check if user exists - if exist get data
-$user = wp_get_current_user();
-$user_id = isset( $user->ID ) ? (int) $user->ID : 0 ;
+$adminEdit = $_REQUEST['admin-edit'];
+$getUser = $_REQUEST['user'];
+
+if (isset($adminEdit) && $adminEdit == 'yes'){
+	$user_id = $getUser;
+} else {
+	$user = wp_get_current_user();
+	$user_id = isset( $user->ID ) ? (int) $user->ID : 0 ;
+}
 
 if ($user_id != 0){
     $userInfo = $wpdb->get_results( "SELECT * FROM ".$meal_planer." WHERE user_id=".$user_id);
@@ -17,6 +23,10 @@ if ($user_id != 0){
 	$secondWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7 OFFSET 7" );
 	$thirdWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7 OFFSET 14" );
 	$fourthWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7 OFFSET 21" );
+}
+
+if (!get_current_user_id()){
+	echo("<script>location.href = '".home_url()."'</script>");
 }
 //else insert user
 ?>
@@ -96,7 +106,7 @@ if ($user_id != 0){
 	<div class="row">
 
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist">
+		<ul class="nav nav-tabs main-nav-tab" role="tablist">
 			<li class="active">
 				<a href="#home" role="tab" data-toggle="tab">
 					<icon class="fa fa-home"></icon> Overview
@@ -106,7 +116,6 @@ if ($user_id != 0){
 					<i class="fa fa-user"></i> Recipes
 				</a>
 			</li>
-
 			<li>
 				<a href="#settings" role="tab" data-toggle="tab">
 					<i class="fa fa-cog"></i> Shopping List
@@ -1023,14 +1032,15 @@ if ($user_id != 0){
 	</div>
 </div>
 <script>
-    $(document).ready(function () {
-        $("#auto").on("click", function(){
-            $("#auto").attr('disabled','disabled');
-            $.ajax
+    jQuery(document).ready(function () {
+
+        jQuery("#auto").on("click", function(){
+            jQuery("#auto").attr('disabled','disabled');
+            jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/auto_initalize_customer.php",
-                data:'',
+                data:'user=<?=$user_id?>',
                 cache: false,
                 success: function(res)
                 {
@@ -1041,48 +1051,48 @@ if ($user_id != 0){
             });
         });
 
-        $("#secondWeek, #thirdWeek, #fourthWeek").hide();
+        jQuery("#secondWeek, #thirdWeek, #fourthWeek").hide();
 
-        $("#week1").on("click", function(){
+        jQuery("#week1").on("click", function(){
             //alert();
-            $("#week1").css({"background-color" :"#418AD0", "color": "white"});
+            jQuery("#week1").css({"background-color" :"#418AD0", "color": "white"});
 
-            $("#secondWeek, #thirdWeek, #fourthWeek").hide(500);
-            $("#week2, #week3, #week4").css({"background-color" :"", "color": ""});
-            $("#firstWeek").show(500);
+            jQuery("#secondWeek, #thirdWeek, #fourthWeek").hide(500);
+            jQuery("#week2, #week3, #week4").css({"background-color" :"", "color": ""});
+            jQuery("#firstWeek").show(500);
         });
 
-        $("#week2").on("click", function(){
+        jQuery("#week2").on("click", function(){
             //alert();
-            $("#week2").css({"background-color" :"#418AD0", "color": "white"});
-            $("#firstWeek, #thirdWeek, #fourthWeek").hide(500);
-            $("#week1, #week3, #week4").css({"background-color" :"", "color": ""});
-            $("#secondWeek").show(500);
+            jQuery("#week2").css({"background-color" :"#418AD0", "color": "white"});
+            jQuery("#firstWeek, #thirdWeek, #fourthWeek").hide(500);
+            jQuery("#week1, #week3, #week4").css({"background-color" :"", "color": ""});
+            jQuery("#secondWeek").show(500);
         });
 
-        $("#week3").on("click", function(){
-            $("#week3").css({"background-color" :"#418AD0", "color": "white"});
-            $("#firstWeek, #secondWeek, #fourthWeek").hide(500);
-            $("#week1, #week2, #week4").css({"background-color" :"", "color": ""});
-            $("#thirdWeek").show(500);
+        jQuery("#week3").on("click", function(){
+            jQuery("#week3").css({"background-color" :"#418AD0", "color": "white"});
+            jQuery("#firstWeek, #secondWeek, #fourthWeek").hide(500);
+            jQuery("#week1, #week2, #week4").css({"background-color" :"", "color": ""});
+            jQuery("#thirdWeek").show(500);
         });
 
-        $("#week4").on("click", function(){
-            $("#week4").css({"background-color" :"#418AD0", "color": "white"});
-            $("#firstWeek, #secondWeek, #thirdWeek").hide(500);
-            $("#week1, #week2, #week3").css({"background-color" :"", "color": ""});
-            $("#fourthWeek").show(500);
+        jQuery("#week4").on("click", function(){
+            jQuery("#week4").css({"background-color" :"#418AD0", "color": "white"});
+            jQuery("#firstWeek, #secondWeek, #thirdWeek").hide(500);
+            jQuery("#week1, #week2, #week3").css({"background-color" :"", "color": ""});
+            jQuery("#fourthWeek").show(500);
         });
 
 
-        $("#startingDate").change(function () {
+        jQuery("#startingDate").change(function () {
             var startingDate = this.value;
-            $("#startingDate").attr('disabled','disabled');
-            $.ajax
+            jQuery("#startingDate").attr('disabled','disabled');
+            jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/initalize_customer.php",
-                data:'startingDate='+ startingDate,
+                data:'startingDate='+ startingDate+'&user=<?=$user_id?>',
                 cache: false,
                 success: function(res)
                 {
@@ -1119,7 +1129,7 @@ if ($user_id != 0){
 
         function getReciepes(planId,planType)
         {
-            $.ajax
+            jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/get_recipes.php",
@@ -1134,16 +1144,17 @@ if ($user_id != 0){
                         rows+=table_row(jsonParse[i],planId,planType);
                         //console.log(obj.post_thumbnail);
                     }
-                    $('#reciepes').html(rows);
+                    jQuery('#reciepes').html(rows);
                 }
             });
         }
         function getFavourites(planId,planType)
         {
-            $.ajax
+            jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/get_favourite.php",
+                data:'user=<?=$user_id?>',
                 cache: false,
                 success: function(res)
                 {
@@ -1155,24 +1166,24 @@ if ($user_id != 0){
                         rows+=table_row(jsonParse[i],planId,planType);
                         //console.log(obj.post_thumbnail);
                     }
-                    $('#favourite').html(rows);
+                    jQuery('#favourite').html(rows);
                 }
             });
         }
-        $(".select_recipe").click(function () {
-            var planId = $(this).attr('data-id');
-            var planType = $(this).attr('data-type');
+        jQuery(".select_recipe").click(function () {
+            var planId = jQuery(this).attr('data-id');
+            var planType = jQuery(this).attr('data-type');
             //alert(planType);
             getReciepes(planId,planType);
             getFavourites(planId,planType);
-            $('#myModal').modal('show');
+            jQuery('#myModal').modal('show');
         });
 
-        $("#myModal").on("click",".confrimRecipe",  function () {
-            var planId = $(this).attr('data-id');
-            var planType = $(this).attr('data-type');
-            var reciepeId = $(this).attr('data-reciepe');
-            $.ajax
+        jQuery("#myModal").on("click",".confrimRecipe",  function () {
+            var planId = jQuery(this).attr('data-id');
+            var planType = jQuery(this).attr('data-type');
+            var reciepeId = jQuery(this).attr('data-reciepe');
+            jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/add_reciepe.php?planId="+planId+"&planType="+planType+"&reciepeId="+reciepeId,
@@ -1181,18 +1192,18 @@ if ($user_id != 0){
                 {
                     var jsonData = JSON.parse(res);
                     console.log(jsonData);
-                    $('#myModal').modal('hide');
-                    $('#'+jsonData.id).attr('src', jsonData.image);
+                    jQuery('#myModal').modal('hide');
+                    jQuery('#'+jsonData.id).attr('src', jsonData.image);
                 }
             });
 
         });
 
-        $('.perform_check').change(function() {
-            var planId = $(this).attr('data-id');
-            var planType = $(this).attr('data-type');
+        jQuery('.perform_check').change(function() {
+            var planId = jQuery(this).attr('data-id');
+            var planType = jQuery(this).attr('data-type');
             if(this.checked) {
-                $.ajax
+                jQuery.ajax
                 ({
                     type: "post",
                     url: "<?=WPAC_PLUGIN_DIR?>" + "inc/perform_meal_check.php?planId="+planId+"&planType="+planType+"&is_checked=1",
@@ -1206,7 +1217,7 @@ if ($user_id != 0){
 
                 //alert(planId);
             } else {
-                $.ajax
+                jQuery.ajax
                 ({
                     type: "post",
                     url: "<?=WPAC_PLUGIN_DIR?>" + "inc/perform_meal_check.php?planId="+planId+"&planType="+planType+"&is_checked=0",
@@ -1220,13 +1231,13 @@ if ($user_id != 0){
             }
         });
         //favourite
-        $(".favourite").click(function () {
-            var $this = $(this);
-            var is_favourite = $(this).attr('data-favourite');
-            var planId = $(this).attr('data-id');
-            var planType = $(this).attr('data-type');
+        jQuery(".favourite").click(function () {
+            var $this = jQuery(this);
+            var is_favourite = jQuery(this).attr('data-favourite');
+            var planId = jQuery(this).attr('data-id');
+            var planType = jQuery(this).attr('data-type');
             //alert(planType);
-            $.ajax
+            jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/add_favourite.php?planId="+planId+"&planType="+planType+"&is_favourite="+is_favourite,

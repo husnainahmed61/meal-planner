@@ -34,8 +34,8 @@ function wpac_plugin_scripts()
     wp_enqueue_script( 'bootstrap-script' );
 
 	// For either a plugin or a theme, you can then enqueue the script:
-    wp_register_script( 'jquery-script', WPAC_PLUGIN_DIR .'assets/js/jquery.min.js', array( 'jquery' ) );
-    wp_enqueue_script( 'jquery-script' );
+//    wp_register_script( 'jquery-script', WPAC_PLUGIN_DIR .'assets/js/jquery.min.js', array( 'jquery' ) );
+//    wp_enqueue_script( 'jquery-script' );
 
 	// For either a plugin or a theme, you can then enqueue the script:
      wp_register_script( 'datatable-script', WPAC_PLUGIN_DIR .'assets/datatable/jquery.dataTables.min.js', array( 'jquery' ) );
@@ -51,7 +51,7 @@ add_action('wp_enqueue_scripts', 'wpac_plugin_scripts');
 
 function enqueue_admin_script() {
     // Stylsheets
-    wp_enqueue_style('bootstrap3-style', WPAC_PLUGIN_DIR . 'assets/js/bootstrap.min.css');
+    //wp_enqueue_style('bootstrap3-style', WPAC_PLUGIN_DIR . 'assets/js/bootstrap.min.css');
     wp_enqueue_style('datatable-style', WPAC_PLUGIN_DIR . 'assets/datatable/jquery.dataTables.min.css');
 
 //    // Bootstrap JS
@@ -59,8 +59,8 @@ function enqueue_admin_script() {
 //    wp_enqueue_script( 'bootstrap-script' );
 
     // Jquery Js
-    wp_register_script( 'jquery-script', WPAC_PLUGIN_DIR .'assets/js/jquery.min.js', array( 'jquery' ) );
-    wp_enqueue_script( 'jquery-script' );
+//    wp_register_script( 'jquery-script', WPAC_PLUGIN_DIR .'assets/js/jquery.min.js', array( 'jquery' ) );
+//    wp_enqueue_script( 'jquery-script' );
 
     // Datatable Js
     wp_register_script( 'datatable-script', WPAC_PLUGIN_DIR .'assets/datatable/jquery.dataTables.min.js', array( 'jquery' ) );

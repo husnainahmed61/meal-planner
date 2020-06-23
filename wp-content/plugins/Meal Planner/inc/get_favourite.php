@@ -8,8 +8,8 @@ global $wpdb;
 $meal_planer      = $wpdb->prefix . "meal_planer";
 $meal_plans    = $wpdb->prefix . "meal_plans";
 
-$user = wp_get_current_user();
-$user_id = isset( $user->ID ) ? (int) $user->ID : 0 ;
+//$user = wp_get_current_user();
+$user_id = $_REQUEST['user'];
 
 if ($user_id != 0){
 	$bf = array();

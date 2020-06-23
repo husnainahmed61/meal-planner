@@ -4,8 +4,8 @@ require_once( str_replace('//','/',dirname(__FILE__).'/') .'../../../../wp-confi
 global $wpdb;
 $meal_planer      = $wpdb->prefix . "meal_planer";
 $meal_plans    = $wpdb->prefix . "meal_plans";
-$user = wp_get_current_user();
-$user_id = isset( $user->ID ) ? (int) $user->ID : 0 ;
+//$user = $_REQUEST['user'];
+$user_id = $_REQUEST['user'];
 
 if ($user_id != 0){
 	if (isset($_POST['startingDate']) && !empty($_POST['startingDate'])){
