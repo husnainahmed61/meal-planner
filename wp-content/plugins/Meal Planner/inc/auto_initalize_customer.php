@@ -31,7 +31,12 @@ if ($user_id != 0){
 
 	if (isset($userInfo) && !empty($userInfo)){
 		if (isset($userPlan) && !empty($userPlan)){
+
 			foreach ($userPlan as $key => $plan){
+				$weightDay = 0;
+				if ($key == 0 || $key == 3 || $key == 10 || $key == 17 || $key == 24 || $key == 28){
+					$weightDay = 1;
+				}
 				$k = array_rand($post_id);
 				$bf = $post_id[$k];
 
@@ -42,6 +47,7 @@ if ($user_id != 0){
 				$dinner = $post_id[$k];
 
 				$data = array(
+					'is_weight_day' => $weightDay,
 					'bf_reciepe_id' => $bf,
 					'lunch_reciepe_id' => $lunch,
 					'dinner_reciepe_id' => $dinner
@@ -52,8 +58,13 @@ if ($user_id != 0){
 		}
 		else{
 			$selectedDate = date('Y-m-d');
+
 			for ($i = 0 ; $i < 28 ; $i++){
+				$weightDay = 0;
 				$date = date('Y-m-d', strtotime($selectedDate . ' +'.$i.' day'));
+				if ($i == 0 || $i == 3 || $i == 10 || $i == 17 || $i == 24 || $i == 28){
+					$weightDay = 1;
+				}
 				$k = array_rand($post_id);
 				$bf = $post_id[$k];
 
@@ -66,6 +77,7 @@ if ($user_id != 0){
 				$data = array(
 					'user_id' =>$user_id,
 					'action_date' => $date,
+					'is_weight_day' => $weightDay,
 					'bf_reciepe_id' => $bf,
 					'lunch_reciepe_id' => $lunch,
 					'dinner_reciepe_id' => $dinner
@@ -83,8 +95,13 @@ if ($user_id != 0){
 
 		if (isset($wpdb->insert_id) && !empty($wpdb->insert_id)){
 			$selectedDate = date('Y-m-d');
+
 			for ($i = 0 ; $i < 28 ; $i++){
+				$weightDay = 0;
 				$date = date('Y-m-d', strtotime($selectedDate . ' +'.$i.' day'));
+				if ($i == 0 || $i == 3 || $i == 10 || $i == 17 || $i == 24 || $i == 28){
+					$weightDay = 1;
+				}
 				$k = array_rand($post_id);
 				$bf = $post_id[$k];
 
@@ -97,6 +114,7 @@ if ($user_id != 0){
 				$data = array(
 					'user_id' =>$user_id,
 					'action_date' => $date,
+					'is_weight_day' => $weightDay,
 					'bf_reciepe_id' => $bf,
 					'lunch_reciepe_id' => $lunch,
 					'dinner_reciepe_id' => $dinner

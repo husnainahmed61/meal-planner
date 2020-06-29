@@ -42,7 +42,7 @@ $usersInfo = $wpdb->get_results( "SELECT * FROM ".$meal_planer);
                     </a>
 
                     <button onclick="deleteMealPlan(<?=$user->user_id?>)">Delete Meal Plan</button>
-                    <button>Reset Meal Plan</button>
+                    <button onclick="resetMealPlan(<?=$user->user_id?>)">Reset Meal Plan</button>
                 </td>
             </tr>
             <?php } } ?>
@@ -64,6 +64,22 @@ $usersInfo = $wpdb->get_results( "SELECT * FROM ".$meal_planer);
         ({
             type: "post",
             url: "<?=WPAC_PLUGIN_DIR?>" + "inc/delete_mealPlan.php",
+            data:'user='+userId,
+            cache: false,
+            success: function(res)
+            {
+                var jsonData = JSON.parse(res);
+                location.reload();
+
+                //console.log(jsonData);
+            }
+        });
+    }
+    function resetMealPlan(userId) {
+        jQuery.ajax
+        ({
+            type: "post",
+            url: "<?=WPAC_PLUGIN_DIR?>" + "inc/reset_mealPlan.php",
             data:'user='+userId,
             cache: false,
             success: function(res)

@@ -17,8 +17,13 @@ if ($user_id != 0){
 			$selectedDate = $_POST['startingDate'];
 			if (isset($userPlan) && !empty($userPlan)){
 				foreach ($userPlan as $key => $plan){
+					$weightDay = 0;
+					if ($key == 0 || $key == 3 || $key == 10 || $key == 17 || $key == 24 || $key == 28){
+						$weightDay = 1;
+					}
 					$date = date('Y-m-d', strtotime($selectedDate . ' +'.$key.' day'));
 					$data = array(
+						'is_weight_day' => $weightDay,
 						'bf_reciepe_id' => NULL,
 						'lunch_reciepe_id' => NULL,
 						'dinner_reciepe_id' => NULL,
@@ -28,8 +33,13 @@ if ($user_id != 0){
 				}
 			} else {
 				for ($i = 0 ; $i < 28 ; $i++){
+					$weightDay = 0;
+					if ($i == 0 || $i == 3 || $i == 10 || $i == 17 || $i == 24 || $i == 28){
+						$weightDay = 1;
+					}
 					$date = date('Y-m-d', strtotime($selectedDate . ' +'.$i.' day'));
 					$data = array(
+						'is_weight_day' => $weightDay,
 						'user_id' =>$user_id,
 						'action_date' => $date,
 					);
@@ -47,8 +57,13 @@ if ($user_id != 0){
 			if (isset($wpdb->insert_id) && !empty($wpdb->insert_id)){
 				$selectedDate = $_POST['startingDate'];
 				for ($i = 0 ; $i < 28 ; $i++){
+					$weightDay = 0;
+					if ($i == 0 || $i == 3 || $i == 10 || $i == 17 || $i == 24 || $i == 28){
+						$weightDay = 1;
+					}
 					$date = date('Y-m-d', strtotime($selectedDate . ' +'.$i.' day'));
 					$data = array(
+						'is_weight_day' => $weightDay,
 						'user_id' =>$user_id,
 						'action_date' => $date,
 					);

@@ -17,8 +17,9 @@ if (isset($adminEdit) && $adminEdit == 'yes'){
 
 if ($user_id != 0){
     $userInfo = $wpdb->get_results( "SELECT * FROM ".$meal_planer." WHERE user_id=".$user_id);
-	$FirstWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7" );
+	$userPlan = $wpdb->get_results( "SELECT * FROM " . $meal_plans . " WHERE user_id=" . $user_id);
 
+	$FirstWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7" );
 	//LEFT JOIN wp_postmeta v1 ON (wp_posts.ID = v1.post_id)
 	$secondWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7 OFFSET 7" );
 	$thirdWeekPlan = $wpdb->get_results( "SELECT * FROM ".$meal_plans." WHERE user_id=".$user_id." LIMIT 7 OFFSET 14" );
@@ -324,7 +325,7 @@ if (!get_current_user_id()){
                 </div>
 			</div>
 			<div class="tab-pane fade" id="profile">
-				<h2>Reciepes Content Goes Here</h2>
+				<h2>Recipes Content</h2>
 				<div class="panel with-nav-tabs panel-info">
 					<div class="panel-heading">
 						<ul class="nav nav-tabs">
@@ -968,8 +969,247 @@ if (!get_current_user_id()){
 				</div>
 			</div>
 			<div class="tab-pane fade" id="settings">
-				<h2>Settings Content Goes Here</h2>
-				<img src="http://lorempixel.com/400/400/cats/4" alt="Cats"/>
+				<br>
+				<div class="row" id="firstWeekPlan">
+                    <div class="col-md-10">
+                        <h4>First Week Shopping List</h4>
+                    </div>
+                    <div class="col-md-2">
+	                    <button class="" onclick="printJS('firstWeekPlan', 'html')">Download PDF</button>
+                    </div>
+					<div class="col-md-4">
+						<h5>Break Fast shopping List</h5>
+					<?php foreach ($FirstWeekPlan as $plan){
+						$bf_meta = get_post_meta( $plan->bf_reciepe_id, $key = '', $single = false );
+
+						$json = $bf_meta['recipe_ingredients'][0];
+						$json_un = unserialize($json);
+
+						foreach ($json_un as $key => $ing){
+							?>
+							<p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+						<?php } ?>
+						<hr>
+					<?php }
+					?>
+					</div>
+					<div class="col-md-4">
+						<h5>Lunch shopping List</h5>
+						<?php foreach ($FirstWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+
+							$json = $lunch_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+								<p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+							<hr>
+						<?php }
+						?>
+					</div>
+					<div class="col-md-4">
+						<h5>Dinner shopping List</h5>
+						<?php foreach ($FirstWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+							$dinner_meta = get_post_meta( $plan->dinner_reciepe_id, $key = '', $single = false );
+
+							$json = $dinner_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+								<p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+							<hr>
+						<?php }
+						?>
+					</div>
+				</div>
+                <br>
+                <div class="row" id="secondWeekPlan">
+                    <div class="col-md-10">
+                        <h4>Second Week Shopping List</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="" onclick="printJS('secondWeekPlan', 'html')">Download PDF</button>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Break Fast shopping List</h5>
+						<?php foreach ($secondWeekPlan as $plan){
+							$bf_meta = get_post_meta( $plan->bf_reciepe_id, $key = '', $single = false );
+
+							$json = $bf_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Lunch shopping List</h5>
+						<?php foreach ($secondWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+
+							$json = $lunch_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Dinner shopping List</h5>
+						<?php foreach ($secondWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+							$dinner_meta = get_post_meta( $plan->dinner_reciepe_id, $key = '', $single = false );
+
+							$json = $dinner_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                </div>
+                <br>
+                <div class="row" id="thirdWeekPlan">
+                    <div class="col-md-10">
+                        <h4>Third Week Shopping List</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="" onclick="printJS('thirdWeekPlan', 'html')">Download PDF</button>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Break Fast shopping List</h5>
+						<?php foreach ($thirdWeekPlan as $plan){
+							$bf_meta = get_post_meta( $plan->bf_reciepe_id, $key = '', $single = false );
+
+							$json = $bf_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Lunch shopping List</h5>
+						<?php foreach ($thirdWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+
+							$json = $lunch_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Dinner shopping List</h5>
+						<?php foreach ($thirdWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+							$dinner_meta = get_post_meta( $plan->dinner_reciepe_id, $key = '', $single = false );
+
+							$json = $dinner_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                </div>
+                <br>
+                <div class="row" id="fourthWeekPlan">
+                    <div class="col-md-10">
+                        <h4>Fourth Week Shopping List</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="" onclick="printJS('fourthWeekPlan', 'html')">Download PDF</button>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Break Fast shopping List</h5>
+						<?php foreach ($fourthWeekPlan as $plan){
+							$bf_meta = get_post_meta( $plan->bf_reciepe_id, $key = '', $single = false );
+
+							$json = $bf_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Lunch shopping List</h5>
+						<?php foreach ($fourthWeekPlan as $plan){
+							$lunch_meta = get_post_meta( $plan->lunch_reciepe_id, $key = '', $single = false );
+
+							$json = $lunch_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Dinner shopping List</h5>
+						<?php foreach ($fourthWeekPlan as $plan){
+							$dinner_meta = get_post_meta( $plan->dinner_reciepe_id, $key = '', $single = false );
+
+							$json = $dinner_meta['recipe_ingredients'][0];
+							$json_un = unserialize($json);
+
+							foreach ($json_un as $key => $ing){
+								?>
+                                <p style="margin: 0"><?=$ing['ingredient'].' '.$ing['amount'].' '.$ing['unit'].' '.($ing['notes'])?></p>
+							<?php } ?>
+                            <hr>
+						<?php }
+						?>
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -981,7 +1221,6 @@ if (!get_current_user_id()){
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 			</div>
 			<div class="modal-body" style="overflow-y: auto; height: 500px">
 				<div class="row">
@@ -997,6 +1236,10 @@ if (!get_current_user_id()){
 								<i class="fa fa-user"></i> Favourites
 							</a>
 						</li>
+                        <li><a href="#current" role="tab" data-toggle="tab">
+                                <i class="fa fa-check"></i> View Current
+                            </a>
+                        </li>
 					</ul>
 					<br>
 					<!-- Tab panes -->
@@ -1004,24 +1247,9 @@ if (!get_current_user_id()){
 						<div class="tab-pane fade active in" id="reciepes">
 						</div>
 						<div class="tab-pane fade" id="favourite">
-							<div class="row">
-								<div class="card mb-3" style="max-width: 540px;">
-									<div class="row no-gutters">
-										<div class="col-md-5">
-											<svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-										</div>
-										<div class="col-md-7">
-											<div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-												<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
-
+                        <div class="tab-pane fade" id="current">
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -1170,12 +1398,40 @@ if (!get_current_user_id()){
                 }
             });
         }
+        function getCurrent(planId,planType)
+        {
+            jQuery.ajax
+            ({
+                type: "post",
+                url: "<?=WPAC_PLUGIN_DIR?>" + "inc/get_current.php",
+                data:'user=<?=$user_id?>&planId='+planId+'&planType='+planType,
+                cache: false,
+                success: function(res)
+                {
+                    var jsonParse = JSON.parse(res);
+                    console.log(jsonParse);
+                    if (jsonParse === 'failed'){
+                        jQuery('#current').html('<div class="row" style="text-align: center;"><h5>Nothing is selected for current tab</h5></div>');
+                    }
+                    else{
+                        var rows = '';
+                        for(var i = 0; i < jsonParse.length; i++) {
+                            var obj = jsonParse[i];
+                            rows+=table_row(jsonParse[i],planId,planType);
+                            //console.log(obj.post_thumbnail);
+                        }
+                        jQuery('#current').html(rows);
+                    }
+                }
+            });
+        }
         jQuery(".select_recipe").click(function () {
             var planId = jQuery(this).attr('data-id');
             var planType = jQuery(this).attr('data-type');
             //alert(planType);
             getReciepes(planId,planType);
             getFavourites(planId,planType);
+            getCurrent(planId,planType);
             jQuery('#myModal').modal('show');
         });
 

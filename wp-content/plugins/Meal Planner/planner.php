@@ -24,6 +24,7 @@ function wpac_plugin_scripts()
 	wp_enqueue_style('custom-style', WPAC_PLUGIN_DIR . 'assets/css/style.css');
     wp_enqueue_style('bootstrap3-style', WPAC_PLUGIN_DIR . 'assets/js/bootstrap3.min.css');
     wp_enqueue_style('datatable-style', WPAC_PLUGIN_DIR . 'assets/datatable/jquery.dataTables.min.css');
+	wp_enqueue_style('print-js', 'https://printjs-4de6.kxcdn.com/print.min.css');
 
     //wp_enqueue_style('wpac-style', WPAC_PLUGIN_DIR . 'assets/EasyAutocomplete/easy-autocomplete.css');
     wp_register_script( 'bootstrap3-script', WPAC_PLUGIN_DIR .'assets/js/bootstrap3.min.js', array( 'jquery' ) );
@@ -40,6 +41,9 @@ function wpac_plugin_scripts()
 	// For either a plugin or a theme, you can then enqueue the script:
      wp_register_script( 'datatable-script', WPAC_PLUGIN_DIR .'assets/datatable/jquery.dataTables.min.js', array( 'jquery' ) );
      wp_enqueue_script( 'datatable-script' );
+
+	wp_register_script( 'printjs-script', 'https://printjs-4de6.kxcdn.com/print.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'printjs-script' );
 
     wp_register_script( 'custom-script', WPAC_PLUGIN_DIR .'assets/js/main.js', array( 'jquery' ) );
     wp_enqueue_script( 'custom-script' );
@@ -96,7 +100,8 @@ function wpac_planner_table()
       id int(11) NOT NULL AUTO_INCREMENT,
       user_id int(11),
       round int(11) DEFAULT 1,
-      action_date  DATE DEFAULT NULL,
+      action_date DATE DEFAULT NULL,
+      is_weight_day INT(1) NOT NULL DEFAULT 0,
       bf_reciepe_id int(11) DEFAULT NULL,
       bf_is_checked int(1) DEFAULT 0,
       bf_is_favourite int(1) DEFAULT 0,
