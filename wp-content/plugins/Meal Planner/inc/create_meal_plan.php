@@ -1361,6 +1361,7 @@ if (!get_current_user_id()){
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/get_recipes.php",
+                data: 'planType='+planType,
                 cache: false,
                 success: function(res)
                 {
