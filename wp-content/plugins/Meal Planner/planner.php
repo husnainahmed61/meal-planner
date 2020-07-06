@@ -100,6 +100,7 @@ function wpac_planner_table()
       id int(11) NOT NULL AUTO_INCREMENT,
       user_id int(11),
       round int(11) DEFAULT 1,
+      day int(11) DEFAULT NULL,
       action_date DATE DEFAULT NULL,
       is_weight_day INT(1) NOT NULL DEFAULT 0,
       bf_reciepe_id int(11) DEFAULT NULL,

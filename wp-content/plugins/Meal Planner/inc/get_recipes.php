@@ -3,6 +3,7 @@ $parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
 require_once( $parse_uri[0] . 'wp-load.php' );
 
 $planType = $_REQUEST['planType'];
+$planDay = $_REQUEST['planDay'];
 
 if ($planType == "bf"){
 	$planType = "breakfast";
@@ -20,7 +21,9 @@ while ($query->have_posts()) {
 
 	if (isset($planType) && !empty($planType)){
 		$category = get_the_category( $post_id );
-		if (isset($category[0]->name) && $category[0]->name == $planType){
+		//$rec[] = $category;
+		if ((isset($category[0]->name) && (ucfirst($category[0]->name) == ucfirst($planDay) || ucfirst($category[0]->name) == ucfirst($planType)))
+		    && ((isset($category[1]->name) && (ucfirst($category[1]->name) == ucfirst($planType) || ucfirst($category[1]->name) == ucfirst($planDay))))){
 			$post_content = array(
 				'post_id' => $post_id,
 				'post_content' => get_post_meta( $post_id, $key = '', $single = false ),

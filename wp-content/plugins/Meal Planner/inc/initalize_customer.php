@@ -23,6 +23,7 @@ if ($user_id != 0){
 					}
 					$date = date('Y-m-d', strtotime($selectedDate . ' +'.$key.' day'));
 					$data = array(
+						'day' => $key+1,
 						'is_weight_day' => $weightDay,
 						'bf_reciepe_id' => NULL,
 						'lunch_reciepe_id' => NULL,
@@ -39,6 +40,7 @@ if ($user_id != 0){
 					}
 					$date = date('Y-m-d', strtotime($selectedDate . ' +'.$i.' day'));
 					$data = array(
+						'day' => $i+1,
 						'is_weight_day' => $weightDay,
 						'user_id' =>$user_id,
 						'action_date' => $date,
@@ -63,6 +65,7 @@ if ($user_id != 0){
 					}
 					$date = date('Y-m-d', strtotime($selectedDate . ' +'.$i.' day'));
 					$data = array(
+						'day' => $i+1,
 						'is_weight_day' => $weightDay,
 						'user_id' =>$user_id,
 						'action_date' => $date,

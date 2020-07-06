@@ -147,30 +147,30 @@ if (!get_current_user_id()){
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->bf_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="bf" data-id="<?=$plan->id?>" value="<?=$plan->bf_is_checked?>">BreakFast</label>
-                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->bf_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$bf_meta['recipe_title'][0]?></p>
 
-                                    <img id="bf_<?=$plan->id?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="bf_<?=$plan->id?>" data-day="Day <?=$key+1?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->lunch_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="lunch" data-id="<?=$plan->id?>" value="<?=$plan->lunch_is_checked?>">Lunch</label>
-                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->lunch_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$lunch_meta['recipe_title'][0]?></p>
-                                    <img id="lunch_<?=$plan->id?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="lunch_<?=$plan->id?>" data-day="Day <?=$key+1?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->dinner_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="dinner" data-id="<?=$plan->id?>" value="<?=$plan->dinner_is_checked?>">Dinner</label>
-                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->dinner_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$dinner_meta['recipe_title'][0]?></p>
-                                    <img id="dinner_<?=$plan->id?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="dinner_<?=$plan->id?>" data-day="Day <?=$key+1?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                             </div>
                             <hr>
@@ -196,30 +196,30 @@ if (!get_current_user_id()){
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->bf_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="bf" data-id="<?=$plan->id?>" value="<?=$plan->bf_is_checked?>">BreakFast</label>
-                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->bf_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$bf_meta['recipe_title'][0]?></p>
 
-                                    <img id="bf_<?=$plan->id?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="bf_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->lunch_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="lunch" data-id="<?=$plan->id?>" value="<?=$plan->lunch_is_checked?>">Lunch</label>
-                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->lunch_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$lunch_meta['recipe_title'][0]?></p>
-                                    <img id="lunch_<?=$plan->id?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="lunch_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->dinner_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="dinner" data-id="<?=$plan->id?>" value="<?=$plan->dinner_is_checked?>">Dinner</label>
-                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->dinner_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$dinner_meta['recipe_title'][0]?></p>
-                                    <img id="dinner_<?=$plan->id?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="dinner_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                             </div>
                             <hr>
@@ -245,30 +245,30 @@ if (!get_current_user_id()){
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->bf_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="bf" data-id="<?=$plan->id?>" value="<?=$plan->bf_is_checked?>">BreakFast</label>
-                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->bf_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$bf_meta['recipe_title'][0]?></p>
 
-                                    <img id="bf_<?=$plan->id?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="bf_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->lunch_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="lunch" data-id="<?=$plan->id?>" value="<?=$plan->lunch_is_checked?>">Lunch</label>
-                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->lunch_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$lunch_meta['recipe_title'][0]?></p>
-                                    <img id="lunch_<?=$plan->id?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="lunch_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->dinner_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="dinner" data-id="<?=$plan->id?>" value="<?=$plan->dinner_is_checked?>">Dinner</label>
-                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->dinner_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$dinner_meta['recipe_title'][0]?></p>
-                                    <img id="dinner_<?=$plan->id?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="dinner_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                             </div>
                             <hr>
@@ -294,30 +294,30 @@ if (!get_current_user_id()){
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->bf_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="bf" data-id="<?=$plan->id?>" value="<?=$plan->bf_is_checked?>">BreakFast</label>
-                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="bf" data-id="<?=$plan->id?>" data-favourite="<?=$plan->bf_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->bf_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$bf_meta['recipe_title'][0]?></p>
 
-                                    <img id="bf_<?=$plan->id?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="bf_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="bf" data-id="<?=$plan->id?>" src="<?=(isset($bf_image) && !empty($bf_image)) ? $bf_image : 'http://via.placeholder.com/300x300?text=Select Your Breakfast'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->lunch_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="lunch" data-id="<?=$plan->id?>" value="<?=$plan->lunch_is_checked?>">Lunch</label>
-                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="lunch" data-id="<?=$plan->id?>" data-favourite="<?=$plan->lunch_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->lunch_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$lunch_meta['recipe_title'][0]?></p>
-                                    <img id="lunch_<?=$plan->id?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="lunch_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="lunch" data-id="<?=$plan->id?>" src="<?=(isset($lunch_image) && !empty($lunch_image)) ? $lunch_image : 'http://via.placeholder.com/300x300?text=Select Your Lunch'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" <?=($plan->dinner_is_checked == 1) ? 'checked' : ''?> class="perform_check" data-type="dinner" data-id="<?=$plan->id?>" value="<?=$plan->dinner_is_checked?>">Dinner</label>
-                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="min-width: 50px;float: right;font-size: xx-large;">
+                                    <button type="button" data-type="dinner" data-id="<?=$plan->id?>" data-favourite="<?=$plan->dinner_is_favourite?>" class="btn btn-sm favourite" style="line-height: 0.6;min-width: 40px;float: right;font-size: large;">
                                         <span class="glyphicon glyphicon-heart<?=($plan->dinner_is_favourite == 0) ? '-empty' : ''?>"></span>
                                     </button>
                                     <p><?=$dinner_meta['recipe_title'][0]?></p>
-                                    <img id="dinner_<?=$plan->id?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
+                                    <img id="dinner_<?=$plan->id?>" data-day="Day <?=$day+1?>" class="select_recipe" data-type="dinner" data-id="<?=$plan->id?>" src="<?=(isset($dinner_image) && !empty($dinner_image)) ? $dinner_image : 'http://via.placeholder.com/300x300?text=Select Your Dinner'?>" alt="Cats" style="height: 300px;width: 100%;object-fit: cover;"/>
                                 </div>
                             </div>
                             <hr>
@@ -1355,13 +1355,13 @@ if (!get_current_user_id()){
             return value;
         }
 
-        function getReciepes(planId,planType)
+        function getReciepes(planId, planType, planDay)
         {
             jQuery.ajax
             ({
                 type: "post",
                 url: "<?=WPAC_PLUGIN_DIR?>" + "inc/get_recipes.php",
-                data: 'planType='+planType,
+                data: 'planType='+planType+'&planDay='+planDay,
                 cache: false,
                 success: function(res)
                 {
@@ -1429,8 +1429,10 @@ if (!get_current_user_id()){
         jQuery(".select_recipe").click(function () {
             var planId = jQuery(this).attr('data-id');
             var planType = jQuery(this).attr('data-type');
+            var planDay = jQuery(this).attr('data-day');
+
             //alert(planType);
-            getReciepes(planId,planType);
+            getReciepes(planId, planType, planDay);
             getFavourites(planId,planType);
             getCurrent(planId,planType);
             jQuery('#myModal').modal('show');
